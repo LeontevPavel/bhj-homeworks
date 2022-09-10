@@ -16,17 +16,34 @@ class Game {
     this.lossElement.textContent = 0;
   }
 
-  registerEvents() {
-    /*
-      TODO:
-      Написать обработчик события, который откликается
-      на каждый введённый символ.
-      В случае правильного ввода слова вызываем this.success()
-      При неправильном вводе символа - this.fail();
-     */
+  // Метод registerEvents
+
+  registerEvents() {            
+    const cheсkSymbol = (event) => { 
+      let currentSymbol = this.currentSymbol.textContent.toLowerCase();      
+      if (event.key.toLowerCase() === currentSymbol) {
+        console.log(`${event.key.toLowerCase()} = ${currentSymbol}`)
+        this.success();
+        console.log('+')
+      }
+      else this.fail();    
+    }
+
+    document.addEventListener('keyup', cheсkSymbol);
   }
 
+
+  /*
+    TODO:
+    Написать обработчик события, который откликается
+    на каждый введённый символ.
+    В случае правильного ввода слова вызываем this.success()
+    При неправильном вводе символа - this.fail();
+   */
+
+
   success() {
+    console.log('+/-0');
     this.currentSymbol.classList.add('symbol_correct');
     this.currentSymbol = this.currentSymbol.nextElementSibling;
     if (this.currentSymbol !== null) {
@@ -38,6 +55,7 @@ class Game {
       this.reset();
     }
     this.setNewWord();
+
   }
 
   fail() {
@@ -56,18 +74,18 @@ class Game {
 
   getWord() {
     const words = [
-        'bob',
-        'awesome',
-        'netology',
-        'hello',
-        'kitty',
-        'rock',
-        'youtube',
-        'popcorn',
-        'cinema',
-        'love',
-        'javascript'
-      ],
+      'bob',
+      'awesome',
+      'netology',
+      'hello',
+      'kitty',
+      'rock',
+      'youtube',
+      'popcorn',
+      'cinema',
+      'love',
+      'javascript'
+    ],
       index = Math.floor(Math.random() * words.length);
 
     return words[index];
@@ -77,7 +95,7 @@ class Game {
     const html = [...word]
       .map(
         (s, i) =>
-          `<span class="symbol ${i === 0 ? 'symbol_current': ''}">${s}</span>`
+          `<span class="symbol ${i === 0 ? 'symbol_current' : ''}">${s}</span>`
       )
       .join('');
     this.wordElement.innerHTML = html;
