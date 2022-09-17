@@ -8,3 +8,14 @@ textarea {
   border: 1px solid #e2e2e2;
   box-sizing: border-box;
 }
+
+.editor_clearing {
+  width: 75px;
+  height: 20px;
+  border: 2px solid #e2e2e2;
+  background-color: #f3f1eb;
+  text-align: center;
+  padding: 3px;
+  margin: auto;
+  cursor: pointer;
+}

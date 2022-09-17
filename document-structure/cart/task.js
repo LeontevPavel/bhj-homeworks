@@ -9,7 +9,7 @@ controlsDec.forEach((item) => {
     item.onclick = () => {
         let quantityValue = (+item.closest('.product__quantity-controls').querySelector('.product__quantity-value').textContent);
         quantityValue--;
-        if (quantityValue < 0) return;
+        if (quantityValue < 1) return;
         item.closest('.product__quantity-controls').querySelector('.product__quantity-value').textContent = quantityValue;
     }
 })

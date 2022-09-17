@@ -1,15 +1,12 @@
 
-// Обработчики события в поле input для отмены отправки сообщений и для добавления новых элементов списка
-document.querySelector('#tasks__form').addEventListener('submit', cancel);
-document.querySelector('#tasks__form').addEventListener('keyup', sendingTask);
+// Обработчики события в поле input для добавления новых элементов списка, срабатывает по событию submit
+document.querySelector('#tasks__form').addEventListener('submit', sendingTask);
 
-function cancel(event) {
-    event.preventDefault();
-};
-// Функция для добавления нового элемента списка дел (вызывается из обработчика по нажатию Enter)
+// Функция для добавления нового элемента списка дел (вызывается из обработчика по событию submit при нажатии Enter или Button)
 function sendingTask(event) {
+    event.preventDefault();
     const input = document.getElementById('task__input');
-    if (input.value.length && event.key === 'Enter') {
+    if (input.value.trim().length) {
         let messageTask = input.value;
         let tasksList = document.getElementById('tasks__list');
         tasksList.insertAdjacentHTML('beforeend',
@@ -18,19 +15,17 @@ function sendingTask(event) {
                 <a href="#" class="task__remove">&times</a>
             </div>    
             `
-        )
+        );
         input.value = '';
-        // Обновление массива списка дел и добавлени обработчика на крестик для удаления
-        let removeTask = Array.from(document.getElementsByClassName('task__remove'));
-        removeTask.forEach((item) => {
-            item.addEventListener('click', close);
-        })
-        
 
-    }
-    event.preventDefault();
-}
+        //  Добавлени обработчика на крестик для удаления добавленного элемента
+        let removeTask = tasksList.lastElementChild;
+        removeTask.addEventListener('click', close);
+        };     
+
+    };    
+
 // Функция для удаления элементов (вызывается в обработчике крестика)
 function close() {
     this.closest('.task').remove();
-} 
+}; 
